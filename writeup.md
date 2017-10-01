@@ -18,8 +18,8 @@ The goals / steps of this project are the following:
 [image1]: ./output_images/writeup_images/training_data.jpg
 [image2]: ./output_images/writeup_images/YUV_HOG_example.jpg
 [image3]: ./output_images/writeup_images/search_windows.jpg
-[image4]: ./output_images/writeup_images/hot_window1.jpg
-[image5]: ./output_images/writeup_images/hot_window2.jpg
+[image4]: ./output_images/writeup_images/hot_windows1.jpg
+[image5]: ./output_images/writeup_images/hot_windows2.jpg
 [image6]: ./output_images/writeup_images/heatmap_examples.JPG
 [image7]: ./output_images/writeup_images/labels_and_bboxes.JPG
 [video1]: ./output_videos/project_video.mp4
@@ -83,7 +83,8 @@ I decided to search each image with three different sliding window sizes. You ca
 | 200 x 200    | 380, 680       | 0.6666     |
 
 The window definition can be found in the `pipeline()` function in the eighth code cell of the Jupyter notebook `Vehicle_Detection_P5.ipynb` located in the project's base directory.
-The following image shows the resulting search windows on one of the test images: 
+
+The following image shows the resulting search windows on one of the test images: 
 
 ![alt text][image3]
 
@@ -91,7 +92,9 @@ The window definition can be found in the `pipeline()` function in the eighth co
 
 Ultimately I searched on three scales using YUV 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
-![alt text][image4] | ![alt text][image5]
+| hot windows example 1 | hot windows example 2 |
+|:----:|:----:|
+|![alt text][image4] | ![alt text][image5] |
 
 
 ### IV. Video Implementation
@@ -121,6 +124,7 @@ I implemented the class `HeatmapBuffer()` which can be found in code cell seven 
 ### V. Discussion
 
 If I had more time to work on this project, I would implement a more sophisticated method to track detected vehicles. The current implementation would have problems with fast moving objects due to fact that I simply add up the heatmaps of several consecutive frames. Taking the speed of detected objects into account, would be a good idea.
-The performance of my pipeline of 1.0 to 1.5 frames per second on my laptop is another issue. Calculating the hog features only once for each frame could help to improve the performance. I haven't implemented this so I would be more flexible with experimenting different search window sizes and window overlaps. In the end, I didn't have the time to integrate this step.
+
+The performance of my pipeline of 1.0 to 1.5 frames per second on my laptop is another issue. Calculating the hog features only once for each frame could help to improve the performance. I haven't implemented this so I would be more flexible with experimenting different search window sizes and window overlaps. In the end, I didn't have the time to integrate this step.
 
 Last but not least, false positives are still an issue. I would suggest a second software layer which carries out sanity checks on all detections. For example a vehicle that pops out of nothing in the middle of the road and disappears again after a view frames, is most likely a false detection.
